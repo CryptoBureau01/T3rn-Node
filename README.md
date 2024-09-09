@@ -1,8 +1,40 @@
 # T3rn-Node
 T3rn-Node Setup
 
+### Summary of the README
 
-### Download the Setup Script
+- **Create and Navigate to Directory**: Instructions for creating a directory and navigating into it.
+- **Download the Setup Script**: Command to download and make the setup script executable.
+- **Run the Setup Script**: Command to execute the setup script.
+- **General Settings**: Environment variables for node setup and logging.
+- **Private Keys**: Instructions for setting up private keys.
+- **Executor Privacy**: Note on privacy and security.
+- **Networks & RPC**: Instructions for specifying networks and custom RPC URLs.
+
+Make sure to update the `README.md` file in your GitHub repository with this information.
+
+
+## General Instructions
+
+Follow these steps to set up the T3rn Node Executor on your Ubuntu system.
+
+### 1. Create and Navigate to the Directory
+
+First, create a directory for the setup and navigate into it:
+
+```bash
+mkdir -p $HOME/T3rn-Node
+cd $HOME/T3rn-Node
+```
+
+### 2. Update the System
+Update your system packages to ensure you have the latest updates and security patches:
+
+```bash
+sudo apt update && sudo apt upgrade -y && sudo apt install screen
+```
+
+### 3. Download the Setup Script
 To download the setup script, use one of the following commands:
 
 ```bash
@@ -10,13 +42,21 @@ curl -L -o buro-setup-t3rn-executor.sh https://github.com/CryptoBuroMaster/T3rn-
 ```
 
 
-## After downloading the script, make it executable:
+### 4. After downloading the script, make it executable:
 
 ```bash
 chmod +x buro-setup-t3rn-executor.sh
 ```
 
-## Run the Script
+### 5. Start a New screen Session
+
+Create a new screen session with a name, e.g., t3rn-node:
+
+```bash
+screen -S t3rn-node
+```
+
+### 6. Run the Script
 Execute the script to start the setup process:
 
 ```bash
@@ -30,7 +70,7 @@ Here's how you can add the README content to provide instructions for general se
 
 This guide will help you set up the T3RN Executor with the `buro-setup-t3rn-executor.sh` script. Please follow the instructions carefully.
 
-## GENERAL SETTINGS
+### GENERAL SETTINGS
 
 1. Set your preferred Node Environment. 
    Example: export NODE_ENV
@@ -55,6 +95,17 @@ Read more about [Executor Privacy and Security](https://docs.t3rn.io/executor/be
    ```bash
    arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn
    ```
+
+
+
+### 7. Check T3rn Node Status 
+
+To reattach to the screen session later and check on the progress, use:
+
+``` bash
+screen -r t3rn-node
+```
+
 
 For more detailed information and advanced configurations, refer to the [T3RN Executor Setup Guide](https://docs.t3rn.io/executor/become-an-executor/binary-setup).
 
