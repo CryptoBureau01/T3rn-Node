@@ -45,7 +45,7 @@ curl -L -o buro-setup-t3rn-executor.sh https://github.com/CryptoBuroMaster/T3rn-
 ### 4. After downloading the script, make it executable:
 
 ```bash
-chmod +x buro-setup-t3rn-executor.sh
+chmod +x buro-t3rn.sh
 ```
 
 ### 5. Start a New screen Session
@@ -60,7 +60,7 @@ screen -S t3rn-node
 Execute the script to start the setup process:
 
 ```bash
-./buro-setup-t3rn-executor.sh
+./buro-t3rn.sh
 ```
 
 Here's how you can add the README content to provide instructions for general settings, private keys, privacy, and network configuration:
@@ -68,7 +68,7 @@ Here's how you can add the README content to provide instructions for general se
 
 ### T3RN Executor Setup by CryptoBuro
 
-This guide will help you set up the T3RN Executor with the `buro-setup-t3rn-executor.sh` script. Please follow the instructions carefully.
+This guide will help you set up the T3RN Executor with the `buro-t3rn.sh` script. Please follow the instructions carefully.
 
 ### GENERAL SETTINGS
 
