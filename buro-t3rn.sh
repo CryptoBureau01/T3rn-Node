@@ -1,5 +1,8 @@
 #!/bin/bash
 
+curl -s https://raw.githubusercontent.com/CryptoBureau01/logo/main/logo.sh | bash
+sleep 5
+
 # Welcome message
 print_info() {
     echo "$1"
