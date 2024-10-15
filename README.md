@@ -38,7 +38,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt install screen
 To download the setup script, use one of the following commands:
 
 ```bash
-curl -L -o buro-t3rn.sh https://github.com/CryptoBuroMaster/T3rn-Node/raw/main/buro-t3rn.sh
+curl -L -o buro-t3rn.sh https://github.com/CryptoBureau01/T3rn-Node/raw/main/buro-t3rn.sh
 ```
 
 
