@@ -108,6 +108,102 @@ setup_node() {
 }
 
 
+# Function to configure the Executor node
+configure_node() {
+    local folder_path="/root/t3rn"
+
+    # Check if the /root/t3rn folder exists
+    if [ ! -d "$folder_path" ]; then
+        print_info "The folder '$folder_path' does not exist. Please run the setup_node function first. Exiting..."
+        return 1
+    fi
+
+    # Navigate to the folder
+    cd "$folder_path" || { print_info "Failed to navigate to $folder_path. Exiting..."; exit 1; }
+
+    # Navigate to the binary directory
+    if [ ! -d "executor/executor/bin" ]; then
+        print_info "The binary directory 'executor/executor/bin' does not exist. Exiting..."
+        return 1
+    fi
+    cd executor/executor/bin
+
+    # Set up environment variables
+    print_info "Setting up environment variables..."
+    read -p "Enter your preferred Node Environment (e.g., testnet, mainnet): " NODE_ENV
+    export NODE_ENV=${NODE_ENV:-testnet}
+    print_info "Node Environment set to: $NODE_ENV"
+
+    export LOG_LEVEL=debug
+    export LOG_PRETTY=false
+    print_info "Log settings configured: LOG_LEVEL=$LOG_LEVEL, LOG_PRETTY=$LOG_PRETTY"
+
+    read -s -p "Enter your Private Key from Metamask: " PRIVATE_KEY_LOCAL
+    export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL
+    print_info "\nPrivate key has been set."
+
+    read -p "Enter the networks to operate on (comma-separated, e.g., arbitrum-sepolia,base-sepolia): " ENABLED_NETWORKS
+    export ENABLED_NETWORKS=${ENABLED_NETWORKS:-arbitrum-sepolia,base-sepolia,optimism-sepolia,l1rn}
+    print_info "Enabled Networks set to: $ENABLED_NETWORKS"
+
+    # Custom RPC URL setup
+    read -p "Would you like to set custom RPC URLs? (y/n): " SET_RPC
+    if [ "$SET_RPC" == "y" ]; then
+        for NETWORK in $(echo $ENABLED_NETWORKS | tr "," "\n"); do
+            read -p "Enter the RPC URLs for $NETWORK (comma-separated): " RPC_URLS
+            export EXECUTOR_${NETWORK^^}_RPC_URLS=$RPC_URLS
+            print_info "RPC URLs set for $NETWORK"
+        done
+    else
+        print_info "Skipping custom RPC URL setup. Default URLs will be used."
+    fi
+
+    # Call the uni_menu function to display the menu
+    master
+}
+
+
+# Function to start the T3rn Executor Node
+start_node() {
+    # Install screen if not already installed
+    if ! command -v screen &> /dev/null; then
+        print_info "Installing 'screen' utility..."
+        apt update && apt install -y screen
+        if [ $? -ne 0 ]; then
+            print_info "Failed to install 'screen'. Please install it manually and try again."
+            return 1
+        fi
+        print_info "'screen' has been successfully installed."
+    else
+        print_info "'screen' is already installed."
+    fi
+
+    # Navigate to the binary directory
+    local binary_path="/root/t3rn/executor/executor/bin"
+    if [ ! -d "$binary_path" ]; then
+        print_info "The directory '$binary_path' does not exist. Please run the setup_node function first. Exiting..."
+        return 1
+    fi
+
+    cd "$binary_path" || { print_info "Failed to navigate to $binary_path. Exiting..."; exit 1; }
+
+    # Start the node in a new screen session
+    print_info "Starting the T3rn Executor Node in a new screen session named 't3rn'..."
+    screen -dmS t3rn ./executor
+    if [ $? -ne 0 ]; then
+        print_info "Failed to start the node in a screen session. Please try again."
+        return 1
+    fi
+
+    # Success message
+    print_info "Your node has been successfully started! You can view it using the command: screen -r t3rn"
+
+    # Call the uni_menu function to display the menu
+    master
+}
+
+
+
 
 
 
@@ -122,20 +218,16 @@ master() {
     print_info ""
     print_info "1. Install-Dependency"
     print_info "2. Setup-Executor"
-    print_info "3. "
-    print_info "4. "
-    print_info "5. "
-    print_info "6. "
-    print_info "7. "
-    print_info "8. "
-    print_info "9. "
+    print_info "3. Node-Configure"
+    print_info "4. Start-Node"
+    print_info "5. Exit"
     print_info ""
     print_info "===================================="
     print_info "     Created By : CB-Master         "
     print_info "===================================="
     print_info ""
     
-    read -p "Enter your choice (1 or 3): " user_choice
+    read -p "Enter your choice (1 or 5): " user_choice
 
     case $user_choice in
         1)
@@ -145,25 +237,16 @@ master() {
             setup_node
             ;;
         3) 
-
+            configure_node
             ;;
         4)
-
+            start_node
             ;;
         5)
-
-            ;;
-        6)
-
-            ;;
-        7)
-
-            ;;
-        8)
             exit 0  # Exit the script after breaking the loop
             ;;
         *)
-            print_error "Invalid choice. Please enter 1 or 3 : "
+            print_error "Invalid choice. Please enter 1 or 5 : "
             ;;
     esac
 }
