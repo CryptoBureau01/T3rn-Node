@@ -17,8 +17,8 @@ sudo apt -q update
 sudo apt -qy upgrade
 
 # Define variables
-EXECUTOR_URL="https://github.com/t3rn/executor-release/releases/download/v0.21.6/executor-linux-v0.21.6.tar.gz"
-EXECUTOR_FILE="executor-linux-v0.21.6.tar.gz"
+EXECUTOR_URL="https://github.com/t3rn/executor-release/releases/download/v0.29.0/executor-linux-v0.29.0.tar.gz"
+EXECUTOR_FILE="executor-linux-v0.29.0.tar.gz"
 
 # Download the Executor binary
 print_info "Downloading the Executor binary from $EXECUTOR_URL..."
