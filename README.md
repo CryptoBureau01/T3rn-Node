@@ -20,57 +20,26 @@ Follow these steps to set up the T3rn Node Executor on your Ubuntu system.
 
 ### 1. Create and Navigate to the Directory
 
-First, create a directory for the setup and navigate into it:
-
-```bash
-mkdir -p $HOME/T3rn-Node
-cd $HOME/T3rn-Node
-```
-
-### 2. Update the System
-Update your system packages to ensure you have the latest updates and security patches:
-
-```bash
-sudo apt update && sudo apt upgrade -y && sudo apt install screen
-```
-
-### 3. Download the Setup Script
 To download the setup script, use one of the following commands:
 
 ```bash
-curl -L -o buro-t3rn.sh https://github.com/CryptoBureau01/T3rn-Node/raw/main/buro-t3rn.sh
+curl -L -o buro-t3rn.sh https://github.com/CryptoBureau01/T3rn-Node/raw/main/t3rn.sh && chmod +x t3rn.sh && ./t3rn.sh
 ```
 
-
-### 4. After downloading the script, make it executable:
-
-```bash
-chmod +x buro-t3rn.sh
-```
-
-### 5. Start a New screen Session
+### 2. Check Your Node in screen Session
 
 Create a new screen session with a name, e.g., t3rn-node:
 
 ```bash
-screen -S t3rn-node
-```
-
-### 6. Run the Script
-Execute the script to start the setup process:
-
-```bash
-./buro-t3rn.sh
+screen -r t3rn
 ```
 
 Here's how you can add the README content to provide instructions for general settings, private keys, privacy, and network configuration:
 
 
-### T3RN Executor Setup by CryptoBuro
+This guide will help you set up the T3RN Executor with the `t3rn.sh` script. Please follow the instructions carefully.
 
-This guide will help you set up the T3RN Executor with the `buro-t3rn.sh` script. Please follow the instructions carefully.
-
-### GENERAL SETTINGS
+### 3 GENERAL SETTINGS
 
 1. Set your preferred Node Environment. 
    Example: export NODE_ENV
@@ -97,14 +66,6 @@ Read more about [Executor Privacy and Security](https://docs.t3rn.io/executor/be
    ```
 
 
-
-### 7. Check T3rn Node Status 
-
-To reattach to the screen session later and check on the progress, use:
-
-``` bash
-screen -r t3rn-node
-```
 
 
 For more detailed information and advanced configurations, refer to the [T3RN Executor Setup Guide](https://docs.t3rn.io/executor/become-an-executor/binary-setup).
